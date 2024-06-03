@@ -1,47 +1,59 @@
+# Gaming API NodeJS
+
+This project is a backend development challenge designed to evaluate proficiency in Node.js, JavaScript, and Express.js. It focuses on API design, database integration, basic security measures, version control, and security and coding concepts.
+
+## INSTALLATION
+
+1. Clone the repository:
+git clone https://github.com/hoanglam3232/gaming-api-nodejs.git
+cd gaming-api-nodejs
+
+
+2. Install the required packages:
+npm install
+
+3. Set up environment variables in a `.env` file:
+NODE_ENV=development
+PORT=3000
+MONGO_URI=your_mongo_uri
+JWT_SECRET=your_jwt_secret
+
+
 ## USAGE
 
 ### Running the Application
 
-To run the application without Nodemon, you can use the following command:
+To start the server
+node src/index.js
 
-```
-node server.js
-```
-
-This command will start the server using the Node.js runtime and execute the `server.js` file. Note that without Nodemon, the server will not automatically restart when changes are made to the source code.
 
 ### Testing API
 
-You can use [Insomnia](https://insomnia.rest/) or similar tools to test your API. If you haven't installed Insomnia, you can download it from [here](https://insomnia.rest/download).
+You can test your API using [Insomnia](https://insomnia.rest/download) or any similar API client tools.
 
 ## DEPENDENCIES
 
-- [express](https://www.npmjs.com/package/express): Node.js framework for building web applications and APIs.
-- [dotenv](https://www.npmjs.com/package/dotenv): Module to load environment variables from a `.env` file.
+- **express**: Framework for building web applications and APIs.
+- **dotenv**: Loads environment variables from a `.env` file.
+- **mongoose**: ODM for MongoDB.
+- **bcryptjs**: Hashes and compares passwords.
+- **jsonwebtoken**: Creates and verifies JSON Web Tokens.
+- **express-validator**: Validates and sanitizes user inputs.
+- **helmet**: Secures apps by setting various HTTP headers.
+- **express-rate-limit**: Limits repeated requests to public APIs.
 
-**Optional**:
+## ENDPOINTS
 
-- [mongoose](https://www.npmjs.com/package/mongoose): Object Data Modeling (ODM) for MongoDB and Node.js.
-- [bcryptjs](https://www.npmjs.com/package/bcryptjs): Module for hashing and comparing passwords.
-- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken): Module for creating and verifying JSON Web Tokens.
-- [express-validator](https://www.npmjs.com/package/express-validator): Middleware for validating and sanitizing data in Express.js.
+- **POST /api/users/register**: Registers a new user.
+- **POST /api/users/login**: Authenticates a user and returns a token.
+- **GET /api/users/me**: Returns the user profile based on the provided token.
+- **PUT /api/users/me**: Updates user details.
+- **DELETE /api/users/me**: Deletes a user.
 
-## INSTALLATION
+## SECURITY PRACTICES
 
-1. Clone this repository to your machine:
-
-   ```
-   git clone https://github.com/hoanglam3232/gaming-api-nodejs.git
-   ```
-
-2. Navigate to the project directory:
-
-   ```
-   cd gaming-api-nodejs
-   ```
-
-3. Install the required packages using npm:
-
-   ```
-   npm install
-   ```
+Implemented security measures include:
+- **Helmet** to set various HTTP headers for security.
+- **Rate Limiting** to limit repeated requests.
+- **Input Sanitization** using express-validator.
+- **Stack Trace Limitation** to avoid revealing error details in production.
