@@ -18,13 +18,10 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// encrypted password
 userSchema.pre("save", async function (next) {
-  // to check if this user modify password or not
   if (!this.isModified("password")) {
     return next();
   }
-  // hash password
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();
