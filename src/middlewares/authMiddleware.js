@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
 const { jwtSecret } = require("../configs");
 
-exports.authMiddleware = (req, res, next) => {
+const authMiddleware = (req, res, next) => {
   const token = req.header("x-auth-token");
+  // check user login or not
   if (!token) {
     return res.status(401).json({ message: "No token, authorization denied" });
   }
@@ -15,3 +16,5 @@ exports.authMiddleware = (req, res, next) => {
     res.status(401).json({ message: "Token is not valid" });
   }
 };
+
+module.exports = authMiddleware;

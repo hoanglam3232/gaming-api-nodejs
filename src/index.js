@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const app = require("./app");
-const { port, mongoUri } = require("./configs");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+const port = process.env.PORT || 3000;
+const mongoUri = process.env.MONGO_URI;
 
 // create sever
 mongoose
