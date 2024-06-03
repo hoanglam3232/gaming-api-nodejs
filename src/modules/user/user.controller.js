@@ -51,8 +51,38 @@ const getProfile = async (req, res, next) => {
   }
 };
 
+const updateUser = [
+  check("username").optional().isAlphanumeric().trim(),
+  check("email").optional().isEmail().normalizeEmail(),
+  check("password").optional().isLength({ min: 6 }).trim(),
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return next(new ApiError(400, "Validation Error", errors.array()));
+    }
+
+    try {
+      const user = await userService.updateUser(req.user.id, req.body);
+      res.json(user);
+    } catch (err) {
+      next(err);
+    }
+  },
+];
+
+const deleteUser = async (req, res, next) => {
+  try {
+    await userService.deleteUser(req.user.id);
+    res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   register,
   login,
   getProfile,
+  updateUser,
+  deleteUser,
 };

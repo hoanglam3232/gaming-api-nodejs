@@ -45,8 +45,22 @@ const getUserById = async (id) => {
   return UserRepository.findUserById(id);
 };
 
+const updateUser = async (id, userData) => {
+  if (userData.password) {
+    const salt = await bcrypt.genSalt(10);
+    userData.password = await bcrypt.hash(userData.password, salt);
+  }
+  return UserRepository.updateUser(id, userData);
+};
+
+const deleteUser = async (id) => {
+  return UserRepository.deleteUser(id);
+};
+
 module.exports = {
   registerUser,
   loginUser,
   getUserById,
+  updateUser,
+  deleteUser,
 };
