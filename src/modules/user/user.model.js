@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
+// define user schema
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -16,8 +17,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  profilePicture: {
+    type: String,
+    required: false,
+  },
 });
 
+// hash password using salt before save
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
