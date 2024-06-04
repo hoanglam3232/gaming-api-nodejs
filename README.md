@@ -11,6 +11,7 @@ cd gaming-api-nodejs
 
 2. Install the required packages:
 npm install
+npm audit fix (to enhance secure)
 
 3. Set up environment variables in a `.env` file:
 NODE_ENV=development
