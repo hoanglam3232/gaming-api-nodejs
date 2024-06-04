@@ -5,28 +5,25 @@ This project is a backend development challenge designed to evaluate proficiency
 ## INSTALLATION
 
 1. Clone the repository:
-git clone https://github.com/hoanglam3232/gaming-api-nodejs.git
-cd gaming-api-nodejs
-
+   git clone https://github.com/hoanglam3232/gaming-api-nodejs.git
+   <br> cd gaming-api-nodejs
 
 2. Install the required packages:
-npm install
-npm audit fix (to enhance secure)
+   npm install
+   <br> npm audit fix (to enhance secure)
 
 3. Set up environment variables in a `.env` file:
-NODE_ENV=development
-PORT=3000
-MONGO_URI=your_mongo_uri
-JWT_SECRET=your_jwt_secret
-
+   <br> NODE_ENV=development
+   <br> PORT=3000
+   <br> MONGO_URI=your_mongo_uri
+   <br> JWT_SECRET=your_jwt_secret
 
 ## USAGE
 
 ### Running the Application
 
 To start the server
-node src/index.js
-
+<br> node src/index.js
 
 ### Testing API
 
@@ -54,6 +51,7 @@ You can test your API using [Insomnia](https://insomnia.rest/download) or any si
 ## SECURITY PRACTICES
 
 Implemented security measures include:
+
 - **Helmet** to set various HTTP headers for security.
 - **Rate Limiting** to limit repeated requests.
 - **Input Sanitization** using express-validator.
