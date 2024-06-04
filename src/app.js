@@ -1,7 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
-const rateLimiter = require("./middlewares/rateLimiter");
-const { errorHandler, responseWrapper } = require("./middlewares");
+const { errorHandler, responseWrapper, rateLimiter } = require("./middlewares");
 const userRoutes = require("./modules/user");
 const app = express();
 
