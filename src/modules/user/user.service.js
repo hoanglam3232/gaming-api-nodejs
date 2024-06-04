@@ -6,9 +6,16 @@ const { jwtSecret } = require("../../configs");
 const registerUser = async (userData) => {
   const { username, email, password } = userData;
 
-  let user = await UserRepository.findUserByEmail(email);
-  if (user) {
-    throw new Error("User already exists");
+  // Check if the email already exists
+  let userByEmail = await UserRepository.findUserByEmail(email);
+  if (userByEmail) {
+    throw new Error("Email already in use");
+  }
+
+  // Check if the username already exists
+  let userByUsername = await UserRepository.findUserByUsername(username);
+  if (userByUsername) {
+    throw new Error("Username already in use");
   }
 
   user = await UserRepository.createUser({
@@ -24,15 +31,12 @@ const loginUser = async (loginData) => {
   const user = await UserRepository.findUserByUsername(username);
 
   if (!user) {
-    console.log("User not found");
-    throw new Error("Invalid credentials");
+    throw new Error("User not found");
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
-  console.log(`Password comparison result: ${isMatch}`);
   if (!isMatch) {
-    console.log("Password does not match");
-    throw new Error("Invalid credentials");
+    throw new Error("Password does not match");
   }
 
   const payload = { user: { id: user.id } };
@@ -46,10 +50,24 @@ const getUserById = async (id) => {
 };
 
 const updateUser = async (id, userData) => {
+  // Check if the new username or email already exists in another user
+  if (userData.username || userData.email) {
+    const existingUser = await UserRepository.findByUsernameOrEmail(
+      userData.username,
+      userData.email,
+      id
+    );
+    if (existingUser) {
+      throw new Error("Username or email already in use by another account");
+    }
+  }
+
   if (userData.password) {
     const salt = await bcrypt.genSalt(10);
     userData.password = await bcrypt.hash(userData.password, salt);
   }
+
+  // Proceed with updating the user
   return UserRepository.updateUser(id, userData);
 };
 

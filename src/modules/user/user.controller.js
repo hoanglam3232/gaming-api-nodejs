@@ -2,6 +2,7 @@ const { check, validationResult } = require("express-validator");
 const userService = require("./user.service");
 const ApiError = require("../../utils/ApiError");
 
+// Registration logic with validation checks
 const register = [
   check("username", "Username is required").not().isEmpty(),
   check("email", "Please include a valid email").isEmail(),
