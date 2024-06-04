@@ -15,8 +15,8 @@ This project is a backend development challenge designed to evaluate proficiency
 3. Set up environment variables in a `.env` file:
    <br> NODE_ENV=development
    <br> PORT=3000
-   <br> MONGO_URI=your_mongo_uri
-   <br> JWT_SECRET=your_jwt_secret
+   <br> MONGO_URI=your_mongo_uri (MONGO_URI in my .env file is intended for test only)
+   <br> JWT_SECRET=your_jwt_secret (JWT_SECRET in my .env file is intended for test only)
 
 ## USAGE
 
