@@ -45,10 +45,6 @@ const loginUser = async (loginData) => {
   return token;
 };
 
-const getUserById = async (id) => {
-  return UserRepository.findUserById(id);
-};
-
 const updateUser = async (id, userData) => {
   // Check if the new username or email already exists in another user
   if (userData.username || userData.email) {
@@ -78,7 +74,6 @@ const deleteUser = async (id) => {
 module.exports = {
   registerUser,
   loginUser,
-  getUserById,
   updateUser,
   deleteUser,
 };
